@@ -220,7 +220,8 @@ public class TestCertManager extends TestCase {
 
         for (int i=0; i < CERT_TYPES.length; i ++) {
             String cmd = GET_DEPLOYED_CERT_CMD + " " + CERT_TYPES[i];
-            rmgr.execute(cmd);
+            RemoteResult rr = rmgr.execute(cmd);
+            assertNotNull(rr);
         }
     }
 
