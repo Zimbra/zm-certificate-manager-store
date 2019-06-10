@@ -42,7 +42,7 @@ import com.zimbra.soap.ZimbraSoapContext;
 public class GetCert extends AdminDocumentHandler {
     final static String CERT_TYPE_STAGED= "staged" ;
     final static String CERT_TYPE_ALL = "all" ;
-    final static String [] CERT_TYPES = {"ldap", "mailboxd", "mta", "proxy"};
+    final static String [] CERT_TYPES = {"imapd", "ldap", "mailboxd", "mta", "proxy"};
     final static String CERT_STAGED_OPTION_SELF = "self" ;
     final static String CERT_STAGED_OPTION_COMM = "comm" ;
     
