@@ -31,7 +31,7 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
 public class MyExportPrivKey {
         private File keystoreFile;
@@ -62,7 +62,7 @@ public class MyExportPrivKey {
             keystore.load(input,password);
             KeyPair keyPair=getPrivateKey(keystore,alias,password);
             PrivateKey privateKey=keyPair.getPrivate();
-            String encoded=encoder.encode(privateKey.getEncoded());
+            String encoded=Base64.getEncoder().encodeToString(privateKey.getEncoded());
             FileWriter fw=new FileWriter(exportedFile);
             fw.write("-----BEGIN PRIVATE KEY-----\n");
             fw.write(encoded);
