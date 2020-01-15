@@ -57,7 +57,6 @@ public class MyExportPrivKey {
 
         public void export() throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
             KeyStore keystore=KeyStore.getInstance(keyStoreType);
-            BASE64Encoder encoder=new BASE64Encoder();
             FileInputStream input = new FileInputStream(keystoreFile);
             keystore.load(input,password);
             KeyPair keyPair=getPrivateKey(keystore,alias,password);
