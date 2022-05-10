@@ -100,8 +100,8 @@ public class GenerateCSR extends AdminDocumentHandler {
 
             String subjectAltNames = getSubjectAltNames(req.getSubjectAltNames()) ;
             if (!Strings.isNullOrEmpty(subjectAltNames)) {
-                cmd.append(" -subjectAltNames '").append(StringEscapeUtils.escapeJavaScript(subjectAltNames))
-                        .append("'");
+                cmd.append(" -subjectAltNames \"").append(StringEscapeUtils.escapeJavaScript(subjectAltNames))
+                        .append("\"");
             }
             RemoteManager rmgr = RemoteManager.getRemoteManager(server);
             ZimbraLog.security.debug("***** Executing the cmd = %s", cmd);
@@ -131,7 +131,7 @@ public class GenerateCSR extends AdminDocumentHandler {
         if (Strings.isNullOrEmpty(subject)) {
             return cmd;
         }
-        cmd.append(" -subject '").append(subject).append("'");
+        cmd.append(" -subject \"").append(subject).append("\"");
         return cmd;
     }
 
