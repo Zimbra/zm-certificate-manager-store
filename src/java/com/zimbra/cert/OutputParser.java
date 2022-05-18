@@ -82,7 +82,7 @@ public class OutputParser {
     }
 
     // Example:
-    // subject=/C=US/ST=CA/L=San Mateo/O=Zimbra/OU=Zimbra Collaboration Suite/CN=admindev.zimbra.com
+    // subject=C = US, ST = NY, L = Buffalo, O = "Synacor, Inc.", OU = Zimbra Collaboration Suite, CN = admindev.zimbra.com
 
     public static HashMap<String, String> parseSubject(String subject) {
         HashMap<String, String> hash = new HashMap<String, String>();
@@ -91,8 +91,8 @@ public class OutputParser {
         Matcher matcher;
         String key;
         String value;
-        Pattern key_pattern = Pattern.compile("^\\/(C|ST|L|O|OU|CN)=(.*)$");
-        Pattern value_pattern = Pattern.compile("^(.*?)(\\/(C|ST|L|O|OU|CN)=.*)$");
+        Pattern key_pattern = Pattern.compile("^\\s?(C|ST|L|O|OU|CN)\\s=\\s(.*),?$");
+        Pattern value_pattern = Pattern.compile("^(.*?)(\\s?(C|ST|L|O|OU|CN)\\s=\\s.*)$");
         String parsing_literal = subject.trim();
         matcher = key_pattern.matcher(parsing_literal);
         while (matcher.matches()) {
@@ -106,6 +106,7 @@ public class OutputParser {
             } else {
                 value = parsing_literal;
             }
+            value = value.replaceFirst(",?$", "");
             hash.put(key, value);
             matcher = key_pattern.matcher(parsing_literal);
         }
