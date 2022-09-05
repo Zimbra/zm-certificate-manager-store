@@ -41,6 +41,9 @@ import com.zimbra.common.util.ZimbraLog;
 import com.zimbra.common.zclient.ZClientException;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.account.soap.SoapProvisioning;
+import com.zimbra.cs.account.Server;
+import com.zimbra.cs.rmgmt.RemoteManager;
+import com.zimbra.cs.rmgmt.RemoteResult;
 import com.zimbra.soap.JaxbUtil;
 import com.zimbra.soap.admin.message.InstallCertRequest;
 import com.zimbra.soap.admin.message.InstallCertResponse;
@@ -211,6 +214,18 @@ public class TestCertManager extends TestCase {
         req.setValidationDays("365");
         InstallCertResponse resp = adminSoapProv.invokeJaxb(req);
         assertNotNull(resp);
+    }
+
+    @Test
+    public void testGetCert() throws ServiceException, Exception {
+        Server server = Provisioning.getInstance().getLocalServer();
+        RemoteManager rmgr = RemoteManager.getRemoteManager(server);
+
+        for (int i=0; i < CERT_TYPES.length; i ++) {
+            String cmd = GET_DEPLOYED_CERT_CMD + " " + CERT_TYPES[i];
+            RemoteResult rr = rmgr.execute(cmd);
+            assertNotNull(rr);
+        }
     }
 
     String uploadRawContent(String fileName, InputStream in, String contentType, long contentLength)
